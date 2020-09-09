@@ -7,28 +7,39 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.m6code.driza.R;
+import com.m6code.driza.model.Track;
 import com.m6code.driza.ui.artist.ArtistViewModel;
 
-public class TrackFragment extends Fragment {
+import java.util.ArrayList;
 
+public class TrackFragment extends Fragment{
+
+    RecyclerView mRecyclerView;
+    TrackFragRecyclerAdapter mFragRecyclerAdapter;
     private TrackViewModel mTrackViewModel;
 
     public View onCreateView(@NonNull LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceState){
-
         mTrackViewModel = ViewModelProviders.of(this).get(TrackViewModel.class);
 
-        View rootView = layoutInflater.inflate(R.layout.fragment_track, container, false);
-        final TextView trackTextView = rootView.findViewById(R.id.text_track);
+        View rootView = layoutInflater.inflate(R.layout.fragment_main, container, false);
+        mRecyclerView = rootView.findViewById(R.id.recyclerView);
 
-        mTrackViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        mTrackViewModel.getTracksLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<Track>>() {
             @Override
-            public void onChanged(String s) {
-                trackTextView.setText(s);
+            public void onChanged(ArrayList<Track> tracks) {
+                mFragRecyclerAdapter = new TrackFragRecyclerAdapter(getActivity(), tracks);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerView.setLayoutManager(layoutManager);
+                mRecyclerView.setAdapter(mFragRecyclerAdapter);
             }
         });
 
