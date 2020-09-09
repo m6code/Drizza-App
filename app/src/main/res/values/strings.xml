@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Driza</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_artist">Artists</string>
     <string name="title_track">Tracks</string>
     <string name="title_playlist">Playlists</string>
-    <string name="tiltle_album">Albums</string>
+    <string name="title_album">Albums</string>
+    <string name="title_explore">Explore</string>
 </resources>

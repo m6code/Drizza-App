@@ -3,23 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/nav_explore">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.m6code.driza.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_explore"
+        android:name="com.m6code.driza.ui.explore.ExploreFragment"
+        android:label="@string/title_explore"
+        tools:layout="@layout/fragment_track" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.m6code.driza.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/nav_track"
+        android:name="com.m6code.driza.ui.track.TrackFragment"
+        android:label="@string/title_track"
+        tools:layout="@layout/fragment_track" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.m6code.driza.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/nav_album"
+        android:name="com.m6code.driza.ui.album.AlbumFragment"
+        android:label="@string/title_album"
+        tools:layout="@layout/fragment_track" />
+
+    <fragment
+        android:id="@+id/nav_artist"
+        android:name="com.m6code.driza.ui.artist.ArtistFragment"
+        android:label="@string/title_artist"
+        tools:layout="@layout/fragment_track" />
+
+    <fragment
+        android:id="@+id/nav_playlist"
+        android:name="com.m6code.driza.ui.playlist.PlaylistFragment"
+        android:label="@string/title_playlist"
+        tools:layout="@layout/fragment_track" />
+
 </navigation>
