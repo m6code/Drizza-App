@@ -4,32 +4,39 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.m6code.driza.R;
+import com.m6code.driza.model.AlbumFromTrackSearch;
+
+import java.util.ArrayList;
 
 public class AlbumFragment extends Fragment {
 
-    private AlbumViewModel mAlbumViewModel;
+    private RecyclerView mRecyclerView;
+    private AlbumFragRecyclerAdapter mFragRecyclerAdapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 
-        mAlbumViewModel = ViewModelProviders.of(this).get(AlbumViewModel.class);
+        AlbumViewModel albumViewModel = ViewModelProviders.of(this).get(AlbumViewModel.class);
 
-        View rootView = inflater.inflate(R.layout.fragment_track, container, false);
-        final TextView textView = rootView.findViewById(R.id.text_track);
+        View rootView = inflater.inflate(R.layout.fragment_album, container, false);
+        mRecyclerView = rootView.findViewById(R.id.recyclerViewAlbum);
 
-        mAlbumViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        albumViewModel.getAlbumLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<AlbumFromTrackSearch>>() {
             @Override
-            public void onChanged(String s) {
-                textView.setText(s);
+            public void onChanged(ArrayList<AlbumFromTrackSearch> albums) {
+                mFragRecyclerAdapter = new AlbumFragRecyclerAdapter(getContext(), albums);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                mRecyclerView.setAdapter(mFragRecyclerAdapter);
             }
         });
+
         return rootView;
     }
 

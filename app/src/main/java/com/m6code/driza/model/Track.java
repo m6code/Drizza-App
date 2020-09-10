@@ -1,29 +1,54 @@
 package com.m6code.driza.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
 public class Track {
+
+    @SerializedName("id")
     private String id;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("link")
     private String link;
+
+    @SerializedName("duration")
     private String duration;
+
+    @SerializedName("track_position")
     private String trackPos;
+
+    @SerializedName("release_date")
     private String releaseDate;
+
+    @SerializedName("preview")
     private String previewUrl;
+
+    @SerializedName("artist")
+    private ArrayList<ArtistFromTrackSearch> mArtists = new ArrayList<>();
+
     private String artist; // artist.name
+
+    @SerializedName("album")
+    private ArrayList<AlbumFromTrackSearch> mAlbums = new ArrayList<>();
+
     private String album; // album.title
+
+    @SerializedName("type")
     private String type;
 
-    public Track(String title, String duration, String trackPos, String releaseDate, String artist, String album, String type) {
+    public Track(String title, String duration, String releaseDate, String type) {
         this.title = title;
         this.duration = duration;
-        this.trackPos = trackPos;
         this.releaseDate = releaseDate;
-        this.artist = artist;
-        this.album = album;
         this.type = type;
     }
 
     public String getDetails() {
-        return type + " Released: " + releaseDate;
+        return type + " - " + releaseDate;
     }
 
     public String getTitle() {

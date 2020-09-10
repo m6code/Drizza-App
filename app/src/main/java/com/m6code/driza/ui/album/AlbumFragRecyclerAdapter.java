@@ -1,4 +1,4 @@
-package com.m6code.driza.ui.track;
+package com.m6code.driza.ui.album;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,50 +11,42 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.m6code.driza.R;
-import com.m6code.driza.model.TrackSearchResponse;
-import com.m6code.driza.model.TrackSearchResponseData;
+import com.m6code.driza.model.AlbumFromTrackSearch;
 
-public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecyclerAdapter.ViewHolder> {
+import java.util.ArrayList;
 
-    private TrackSearchResponse reponseData;
-    //private ArrayList<TrackSearchData> trackData;
+public class AlbumFragRecyclerAdapter extends RecyclerView.Adapter<AlbumFragRecyclerAdapter.ViewHolder> {
+
+    private final ArrayList<AlbumFromTrackSearch> albumsData;
     private final Context mContext;
     LayoutInflater mLayoutInflater;
 
-//    public TrackFragRecyclerAdapter( Context mContext, TrackExampleResponse reponseData, ArrayList<TrackSearchData> tracks){
-//        this.reponseData = reponseData;
-//        //this.trackData =tracks;
-//        this.mContext = mContext;
-//        mLayoutInflater = LayoutInflater.from(mContext);
-//    }
-
-    public TrackFragRecyclerAdapter(Context context, TrackSearchResponse trackSearchResponse) {
-        mContext = context;
-        reponseData = trackSearchResponse;
-        mLayoutInflater = LayoutInflater.from(mContext);
+    public AlbumFragRecyclerAdapter(Context context, ArrayList<AlbumFromTrackSearch> albumsData) {
+        this.albumsData = albumsData;
+        this.mContext = context;
+        mLayoutInflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //View itemView = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
         View itemView = mLayoutInflater.inflate(R.layout.list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TrackSearchResponseData track = reponseData.getData().get(position);
-        holder.mTitle.setText(track.getTitle());
-        holder.mArtist.setText(track.getArtist().getName());
-        holder.mDetails.setText(track.getArtist().getDetails());
-        holder.mCover.setImageResource(R.drawable.ic_track_24);
+        AlbumFromTrackSearch album = albumsData.get(position);
+        holder.mTitle.setText(album.getTitle());
+        holder.mArtist.setText(album.getTitle());
+        holder.mDetails.setText(album.getTitle());
+        holder.mCover.setImageResource(R.drawable.ic_album_24);
         holder.mCurrentPos = position;
     }
 
     @Override
     public int getItemCount() {
-        return reponseData.getData().size();
+        return albumsData.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
