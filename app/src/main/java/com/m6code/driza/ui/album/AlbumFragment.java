@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.m6code.driza.R;
-import com.m6code.driza.model.AlbumFromTrackSearch;
+import com.m6code.driza.model.Album;
 
 import java.util.ArrayList;
 
@@ -28,9 +28,9 @@ public class AlbumFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_album, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerViewAlbum);
 
-        albumViewModel.getAlbumLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<AlbumFromTrackSearch>>() {
+        albumViewModel.getAlbumLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<Album>>() {
             @Override
-            public void onChanged(ArrayList<AlbumFromTrackSearch> albums) {
+            public void onChanged(ArrayList<Album> albums) {
                 mFragRecyclerAdapter = new AlbumFragRecyclerAdapter(getContext(), albums);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 mRecyclerView.setAdapter(mFragRecyclerAdapter);

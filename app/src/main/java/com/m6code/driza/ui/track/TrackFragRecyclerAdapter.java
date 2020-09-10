@@ -10,9 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.m6code.driza.R;
+import com.m6code.driza.model.TrackDatum;
 import com.m6code.driza.model.TrackSearchResponse;
-import com.m6code.driza.model.TrackSearchResponseData;
 
 public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecyclerAdapter.ViewHolder> {
 
@@ -44,12 +46,38 @@ public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TrackSearchResponseData track = reponseData.getData().get(position);
+        TrackDatum track = reponseData.getData().get(position);
         holder.mTitle.setText(track.getTitle());
         holder.mArtist.setText(track.getArtist().getName());
         holder.mDetails.setText(track.getArtist().getDetails());
-        holder.mCover.setImageResource(R.drawable.ic_track_24);
+
+        // Use Glide to load images
+        Glide.with(mContext)
+                .load(track.getAlbum().getCover())
+                .placeholder(R.drawable.ic_track_24)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(holder.mCover);
+
         holder.mCurrentPos = position;
+
+//        if (isImagePosition(position)) {
+//            Glide.with(mContext)
+//                    .load(track.getAlbum().getCover())
+//                    .placeholder(R.drawable.ic_track_24)
+//                    .into(holder.mCover);
+//        } else {
+//            Glide.with(mContext).clear(holder.mCover);
+//            holder.mCover.setImageResource(R.drawable.ic_track_24);
+//        }
+
+
+//        Glide.with(fragment)
+//                .load(myUrl)
+//                .placeholder(placeholder)
+//                .fitCenter()
+//                .into(imageView);
+
     }
 
     @Override

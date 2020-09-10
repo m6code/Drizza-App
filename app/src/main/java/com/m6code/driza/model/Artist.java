@@ -3,7 +3,7 @@ package com.m6code.driza.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ArtistFromTrackSearch {
+public class Artist {
 
     @SerializedName("id")
     @Expose
@@ -29,6 +29,15 @@ public class ArtistFromTrackSearch {
     @SerializedName("picture_xl")
     @Expose
     private String pictureXl;
+    @SerializedName("nb_album")
+    @Expose
+    private Integer nbAlbum;
+    @SerializedName("nb_fan")
+    @Expose
+    private Integer nbFan;
+    @SerializedName("radio")
+    @Expose
+    private Boolean radio;
     @SerializedName("tracklist")
     @Expose
     private String tracklist;
@@ -116,6 +125,29 @@ public class ArtistFromTrackSearch {
         this.type = type;
     }
 
+    public Integer getNbAlbum() {
+        return nbAlbum;
+    }
+
+    public void setNbAlbum(Integer nbAlbum) {
+        this.nbAlbum = nbAlbum;
+    }
+
+    public Integer getNbFan() {
+        return nbFan;
+    }
+
+    public void setNbFan(Integer nbFan) {
+        this.nbFan = nbFan;
+    }
+
+    public Boolean getRadio() {
+        return radio;
+    }
+
+    public void setRadio(Boolean radio) {
+        this.radio = radio;
+    }
 
 //    public String getDetails() {
 //        return type + " (" + nb_album + ") Albums";

@@ -9,7 +9,7 @@ public class TrackSearchResponse {
 
         @SerializedName("data")
         @Expose
-        private List<TrackSearchResponseData> data = null;
+        private List<TrackDatum> data = null;
         @SerializedName("total")
         @Expose
         private Integer total;
@@ -30,18 +30,18 @@ public class TrackSearchResponse {
          * @param total total number of tracks returned from search
          * @param data track data returned from search
          */
-        public TrackSearchResponse(List<TrackSearchResponseData> data, Integer total, String next) {
+        public TrackSearchResponse(List<TrackDatum> data, Integer total, String next) {
             super();
             this.data = data;
             this.total = total;
             this.next = next;
         }
 
-        public List<TrackSearchResponseData> getData() {
+        public List<TrackDatum> getData() {
             return data;
         }
 
-        public void setData(List<TrackSearchResponseData> data) {
+        public void setData(List<TrackDatum> data) {
             this.data = data;
         }
 

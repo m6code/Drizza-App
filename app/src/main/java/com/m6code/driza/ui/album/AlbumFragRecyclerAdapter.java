@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.m6code.driza.R;
-import com.m6code.driza.model.AlbumFromTrackSearch;
+import com.m6code.driza.model.Album;
 
 import java.util.ArrayList;
 
 public class AlbumFragRecyclerAdapter extends RecyclerView.Adapter<AlbumFragRecyclerAdapter.ViewHolder> {
 
-    private final ArrayList<AlbumFromTrackSearch> albumsData;
+    private final ArrayList<Album> albumsData;
     private final Context mContext;
     LayoutInflater mLayoutInflater;
 
-    public AlbumFragRecyclerAdapter(Context context, ArrayList<AlbumFromTrackSearch> albumsData) {
+    public AlbumFragRecyclerAdapter(Context context, ArrayList<Album> albumsData) {
         this.albumsData = albumsData;
         this.mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
@@ -36,7 +36,7 @@ public class AlbumFragRecyclerAdapter extends RecyclerView.Adapter<AlbumFragRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        AlbumFromTrackSearch album = albumsData.get(position);
+        Album album = albumsData.get(position);
         holder.mTitle.setText(album.getTitle());
         holder.mArtist.setText(album.getTitle());
         holder.mDetails.setText(album.getTitle());

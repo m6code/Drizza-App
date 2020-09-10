@@ -1,10 +1,9 @@
 package com.m6code.driza.model;
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TrackSearchResponseData {
+public class TrackDatum {
 
     @SerializedName("id")
     @Expose
@@ -45,12 +44,15 @@ public class TrackSearchResponseData {
     @SerializedName("md5_image")
     @Expose
     private String md5Image;
+    @SerializedName("time_add")
+    @Expose
+    private Integer timeAdd;
     @SerializedName("artist")
     @Expose
-    private ArtistFromTrackSearch artist;
+    private Artist artist;
     @SerializedName("album")
     @Expose
-    private AlbumFromTrackSearch album;
+    private Album album;
     @SerializedName("type")
     @Expose
     private String type;
@@ -159,19 +161,27 @@ public class TrackSearchResponseData {
         this.md5Image = md5Image;
     }
 
-    public ArtistFromTrackSearch getArtist() {
+    public Integer getTimeAdd() {
+        return timeAdd;
+    }
+
+    public void setTimeAdd(Integer timeAdd) {
+        this.timeAdd = timeAdd;
+    }
+
+    public Artist getArtist() {
         return artist;
     }
 
-    public void setArtist(ArtistFromTrackSearch artist) {
+    public void setArtist(Artist artist) {
         this.artist = artist;
     }
 
-    public AlbumFromTrackSearch getAlbum() {
+    public Album getAlbum() {
         return album;
     }
 
-    public void setAlbum(AlbumFromTrackSearch album) {
+    public void setAlbum(Album album) {
         this.album = album;
     }
 
@@ -182,4 +192,5 @@ public class TrackSearchResponseData {
     public void setType(String type) {
         this.type = type;
     }
+
 }

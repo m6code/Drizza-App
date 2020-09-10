@@ -1,6 +1,6 @@
 package com.m6code.driza.services;
 
-import com.m6code.driza.model.AlbumFromTrackSearch;
+import com.m6code.driza.model.Album;
 import com.m6code.driza.model.TrackSearchResponse;
 
 import java.util.ArrayList;
@@ -15,5 +15,5 @@ public interface DeezerApiQueryService {
     Call<TrackSearchResponse> getTrackList(@Url String url);
 
     @GET()
-    Call<ArrayList<AlbumFromTrackSearch>> getAlbumList(@Url String url);
+    Call<ArrayList<Album>> getAlbumList(@Url String url);
 }
