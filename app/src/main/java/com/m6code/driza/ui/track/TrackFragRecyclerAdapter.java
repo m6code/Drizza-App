@@ -19,16 +19,8 @@ import com.m6code.driza.model.SearchResponse;
 public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecyclerAdapter.ViewHolder> {
 
     private SearchResponse reponseData;
-    //private ArrayList<TrackSearchData> trackData;
     private final Context mContext;
     LayoutInflater mLayoutInflater;
-
-//    public TrackFragRecyclerAdapter( Context mContext, TrackExampleResponse reponseData, ArrayList<TrackSearchData> tracks){
-//        this.reponseData = reponseData;
-//        //this.trackData =tracks;
-//        this.mContext = mContext;
-//        mLayoutInflater = LayoutInflater.from(mContext);
-//    }
 
     public TrackFragRecyclerAdapter(Context context, SearchResponse searchResponse) {
         mContext = context;
