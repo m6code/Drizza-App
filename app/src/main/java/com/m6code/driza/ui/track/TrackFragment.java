@@ -9,14 +9,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.m6code.driza.R;
 import com.m6code.driza.datasource.UserSearch;
-import com.m6code.driza.model.SearchResponse;
 import com.m6code.driza.services.NetworkUtil;
 
 public class TrackFragment extends Fragment {
@@ -26,7 +24,9 @@ public class TrackFragment extends Fragment {
     private ProgressBar mProgressBar;
 
     public View onCreateView(@NonNull LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceState) {
-        TrackViewModel trackViewModel = ViewModelProviders.of(this).get(TrackViewModel.class);
+
+        TrackViewModel trackViewModel = new ViewModelProvider.AndroidViewModelFactory(
+                getActivity().getApplication()).create(TrackViewModel.class);
 
         View rootView = layoutInflater.inflate(R.layout.fragment_main, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
@@ -34,15 +34,22 @@ public class TrackFragment extends Fragment {
 
         if (NetworkUtil.getConnectionStatus(getActivity())) {
             if (!UserSearch.getSearchText().trim().isEmpty()) {
-                trackViewModel.getTracksLiveData().observe(getViewLifecycleOwner(), new Observer<SearchResponse>() {
-                    @Override
-                    public void onChanged(SearchResponse searchResponse) {
-                        mFragRecyclerAdapter = new TrackFragRecyclerAdapter(getContext(), searchResponse);
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                        mRecyclerView.setAdapter(mFragRecyclerAdapter);
-                        mProgressBar.setVisibility(View.GONE); // Find and set visibility of progressBar
-                    }
+                trackViewModel.getTracksLiveData().observe(getViewLifecycleOwner(), searchResponse -> {
+                    mFragRecyclerAdapter = new TrackFragRecyclerAdapter(getContext(), searchResponse);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    mRecyclerView.setAdapter(mFragRecyclerAdapter);
+                    mProgressBar.setVisibility(View.GONE); // Find and set visibility of progressBar
                 });
+                // SAME AS ABOVE CODE
+//                trackViewModel.getTracksLiveData().observe(getViewLifecycleOwner(), new Observer<SearchResponse>() {
+//                    @Override
+//                    public void onChanged(SearchResponse searchResponse) {
+//                        mFragRecyclerAdapter = new TrackFragRecyclerAdapter(getContext(), searchResponse);
+//                        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//                        mRecyclerView.setAdapter(mFragRecyclerAdapter);
+//                        mProgressBar.setVisibility(View.GONE); // Find and set visibility of progressBar
+//                    }
+//                });
 
             } else {
                 mProgressBar.setVisibility(View.GONE);
