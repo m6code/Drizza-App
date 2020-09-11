@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,24 +22,24 @@ import com.m6code.driza.ui.artist.ArtistFragRecyclerAdapter;
 
 public class PlaylistFragment extends Fragment {
 
-    private PlaylistViewModel mPlaylistViewModel;
     private RecyclerView mRecyclerView;
     private PlaylistFragRecyclerAdapter mFragRecyclerAdapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 
-        mPlaylistViewModel = ViewModelProviders.of(this).get(PlaylistViewModel.class);
+        PlaylistViewModel playlistViewModel = ViewModelProviders.of(this).get(PlaylistViewModel.class);
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
 
         if(NetworkUtil.getConnectionStatus(getContext())) {
-            mPlaylistViewModel.getPlaylistLiveData().observe(getViewLifecycleOwner(), new Observer<SearchResponse>() {
+            playlistViewModel.getPlaylistLiveData().observe(getViewLifecycleOwner(), new Observer<SearchResponse>() {
                 @Override
                 public void onChanged(SearchResponse searchResponse) {
                     mFragRecyclerAdapter = new PlaylistFragRecyclerAdapter(getContext(), searchResponse);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     mRecyclerView.setAdapter(mFragRecyclerAdapter);
+                    rootView.findViewById(R.id.progressBar).setVisibility(View.GONE); // Find and set visibility of progressBar
                 }
             });
         }else{

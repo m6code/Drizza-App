@@ -40,6 +40,7 @@ public class AlbumFragment extends Fragment {
                     mFragRecyclerAdapter = new AlbumFragRecyclerAdapter(getContext(), searchResponse);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     mRecyclerView.setAdapter(mFragRecyclerAdapter);
+                    rootView.findViewById(R.id.progressBar).setVisibility(View.GONE); // Find and set visibility of progressBar
                 }
             });
 
