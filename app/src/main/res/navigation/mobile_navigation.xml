@@ -3,36 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_explore">
+    app:startDestination="@+id/nav_track">
 
-    <fragment
-        android:id="@+id/nav_explore"
-        android:name="com.m6code.driza.ui.explore.ExploreFragment"
-        android:label="@string/title_explore"
-        tools:layout="@layout/fragment_track" />
+<!--    <fragment-->
+<!--        android:id="@+id/nav_explore"-->
+<!--        android:name="com.m6code.driza.ui.explore.ExploreFragment"-->
+<!--        android:label="@string/title_explore"-->
+<!--        tools:layout="@layout/fragment_track" />-->
 
     <fragment
         android:id="@+id/nav_track"
         android:name="com.m6code.driza.ui.track.TrackFragment"
         android:label="@string/title_track"
-        tools:layout="@layout/fragment_track" />
+        tools:layout="@layout/fragment_main" />
 
     <fragment
         android:id="@+id/nav_album"
         android:name="com.m6code.driza.ui.album.AlbumFragment"
         android:label="@string/title_album"
-        tools:layout="@layout/fragment_track" />
+        tools:layout="@layout/fragment_main" />
 
     <fragment
         android:id="@+id/nav_artist"
         android:name="com.m6code.driza.ui.artist.ArtistFragment"
         android:label="@string/title_artist"
-        tools:layout="@layout/fragment_track" />
+        tools:layout="@layout/fragment_main" />
 
     <fragment
         android:id="@+id/nav_playlist"
         android:name="com.m6code.driza.ui.playlist.PlaylistFragment"
         android:label="@string/title_playlist"
-        tools:layout="@layout/fragment_track" />
+        tools:layout="@layout/fragment_main" />
 
 </navigation>

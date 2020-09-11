@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Driza</string>
+    <string name="app_name">Drizza</string>
     <string name="title_home">Home</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_artist">Artists</string>
@@ -8,4 +8,6 @@
     <string name="title_album">Albums</string>
     <string name="title_explore">Explore</string>
     <string name="cover">Cover</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Enter keywords</string>
 </resources>
