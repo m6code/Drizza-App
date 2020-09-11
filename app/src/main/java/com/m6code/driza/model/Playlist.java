@@ -3,13 +3,14 @@ package com.m6code.driza.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigInteger;
 import java.util.Locale;
 
 public class Playlist {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private BigInteger id;
     @SerializedName("title")
     @Expose
     private String title;
@@ -33,7 +34,7 @@ public class Playlist {
     private Integer nbTracks;
     @SerializedName("fans")
     @Expose
-    private Integer fans;
+    private BigInteger fans;
     @SerializedName("link")
     @Expose
     private String link;
@@ -77,11 +78,11 @@ public class Playlist {
     @Expose
     private Tracks tracks;
 
-    public Integer getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -141,11 +142,11 @@ public class Playlist {
         this.nbTracks = nbTracks;
     }
 
-    public Integer getFans() {
+    public BigInteger getFans() {
         return fans;
     }
 
-    public void setFans(Integer fans) {
+    public void setFans(BigInteger fans) {
         this.fans = fans;
     }
 

@@ -1,5 +1,6 @@
 package com.m6code.driza.model;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -11,7 +12,7 @@ public class Album {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private BigInteger id;
     @SerializedName("title")
     @Expose
     private String title;
@@ -67,7 +68,7 @@ public class Album {
     private Integer duration;
     @SerializedName("fans")
     @Expose
-    private Integer fans;
+    private BigInteger fans;
     @SerializedName("rating")
     @Expose
     private Integer rating;
@@ -99,11 +100,11 @@ public class Album {
     @Expose
     private Tracks tracks;
 
-    public Integer getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -243,11 +244,11 @@ public class Album {
         this.duration = duration;
     }
 
-    public Integer getFans() {
+    public BigInteger getFans() {
         return fans;
     }
 
-    public void setFans(Integer fans) {
+    public void setFans(BigInteger fans) {
         this.fans = fans;
     }
 

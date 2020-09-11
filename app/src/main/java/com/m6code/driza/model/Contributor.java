@@ -3,11 +3,13 @@ package com.m6code.driza.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigInteger;
+
 public class Contributor {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private BigInteger id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -45,11 +47,11 @@ public class Contributor {
     @Expose
     private String role;
 
-    public Integer getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 

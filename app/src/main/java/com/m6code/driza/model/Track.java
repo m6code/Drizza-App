@@ -1,5 +1,6 @@
 package com.m6code.driza.model;
 
+import java.math.BigInteger;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,7 +9,7 @@ public class Track {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private BigInteger id;
     @SerializedName("readable")
     @Expose
     private Boolean readable;
@@ -41,7 +42,7 @@ public class Track {
     private Integer diskNumber;
     @SerializedName("rank")
     @Expose
-    private Integer rank;
+    private BigInteger rank;
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
@@ -82,11 +83,11 @@ public class Track {
     @Expose
     private String type;
 
-    public Integer getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -170,11 +171,11 @@ public class Track {
         this.diskNumber = diskNumber;
     }
 
-    public Integer getRank() {
+    public BigInteger getRank() {
         return rank;
     }
 
-    public void setRank(Integer rank) {
+    public void setRank(BigInteger rank) {
         this.rank = rank;
     }
 
