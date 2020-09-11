@@ -30,21 +30,24 @@ public class AlbumViewModel extends ViewModel {
         albumsLiveData = new MutableLiveData<>();
 
         DeezerApiQueryService queryAlbumService = ApiServiceBuilder.buildApiService(DeezerApiQueryService.class);
-        Call<SearchResponse> queryAlbum = queryAlbumService.searchApi("album", UserSearch.getSearchText(), 500);
-        queryAlbum.enqueue(new Callback<SearchResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<SearchResponse> call, @NonNull Response<SearchResponse> response) {
-                if (response.isSuccessful()) {
-                    albumsLiveData.setValue(response.body());
+        // Do not make Api call if string is empty
+        if (!UserSearch.getSearchText().trim().isEmpty()) {
+            Call<SearchResponse> queryAlbum = queryAlbumService.searchApi("album", UserSearch.getSearchText(), 500);
+            queryAlbum.enqueue(new Callback<SearchResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<SearchResponse> call, @NonNull Response<SearchResponse> response) {
+                    if (response.isSuccessful()) {
+                        albumsLiveData.setValue(response.body());
+                    }
+
                 }
 
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
-                Log.e(LOG_TAG, "Request Failed : " + t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
+                    Log.e(LOG_TAG, "Request Failed : " + t.getMessage());
+                }
+            });
+        }
     }
 
     public MutableLiveData<SearchResponse> getAlbumsLiveData() {

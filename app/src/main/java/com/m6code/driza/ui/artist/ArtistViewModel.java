@@ -25,20 +25,23 @@ public class ArtistViewModel extends ViewModel {
     public ArtistViewModel() {
         responseData = new MutableLiveData<>();
         DeezerApiQueryService artistQueryService = ApiServiceBuilder.buildApiService(DeezerApiQueryService.class);
-        Call<SearchResponse> artistQuery = artistQueryService.searchApi("artist", UserSearch.getSearchText(), 500);
-        artistQuery.enqueue(new Callback<SearchResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<SearchResponse> call, @NonNull Response<SearchResponse> response) {
-                if (response.isSuccessful()) {
-                    responseData.setValue(response.body());
+        // Do not make Api call if string is empty
+        if (!UserSearch.getSearchText().trim().isEmpty()) {
+            Call<SearchResponse> artistQuery = artistQueryService.searchApi("artist", UserSearch.getSearchText(), 500);
+            artistQuery.enqueue(new Callback<SearchResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<SearchResponse> call, @NonNull Response<SearchResponse> response) {
+                    if (response.isSuccessful()) {
+                        responseData.setValue(response.body());
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
-                Log.e(LOG_TAG, "Request Failed : " + t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
+                    Log.e(LOG_TAG, "Request Failed : " + t.getMessage());
+                }
+            });
+        }
     }
 
     public MutableLiveData<SearchResponse> getResponseData() {
