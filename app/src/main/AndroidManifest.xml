@@ -26,6 +26,10 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+        <provider
+            android:name=".datasource.SearchSuggestionProvider"
+            android:authorities="com.m6code.driza.datasource.SearchSuggestionProvider" />
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

@@ -49,12 +49,12 @@ public class AlbumFragment extends Fragment {
                 });
             } else {
                 mProgressBar.setVisibility(View.GONE);
-                Toast.makeText(getContext(), "Enter a Text Please", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Provide search text", Toast.LENGTH_LONG).show();
             }
 
         } else {
             mProgressBar.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "No Internet, Check your connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "No Internet, check your connection!", Toast.LENGTH_LONG).show();
         }
 
         return rootView;
