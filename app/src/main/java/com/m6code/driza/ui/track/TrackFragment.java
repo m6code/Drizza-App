@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.m6code.driza.R;
-import com.m6code.driza.model.TrackSearchResponse;
+import com.m6code.driza.model.SearchResponse;
 
 public class TrackFragment extends Fragment{
 
@@ -26,10 +26,10 @@ public class TrackFragment extends Fragment{
         View rootView = layoutInflater.inflate(R.layout.fragment_main, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
 
-        trackViewModel.getTracksLiveData().observe(getViewLifecycleOwner(), new Observer<TrackSearchResponse>() {
+        trackViewModel.getTracksLiveData().observe(getViewLifecycleOwner(), new Observer<SearchResponse>() {
             @Override
-            public void onChanged(TrackSearchResponse trackSearchResponse) {
-                mFragRecyclerAdapter = new TrackFragRecyclerAdapter(getContext(), trackSearchResponse);
+            public void onChanged(SearchResponse searchResponse) {
+                mFragRecyclerAdapter = new TrackFragRecyclerAdapter(getContext(), searchResponse);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 mRecyclerView.setAdapter(mFragRecyclerAdapter);
             }

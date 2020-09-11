@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.m6code.driza.R;
-import com.m6code.driza.model.TrackDatum;
-import com.m6code.driza.model.TrackSearchResponse;
+import com.m6code.driza.model.Datum;
+import com.m6code.driza.model.SearchResponse;
 
 public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecyclerAdapter.ViewHolder> {
 
-    private TrackSearchResponse reponseData;
+    private SearchResponse reponseData;
     //private ArrayList<TrackSearchData> trackData;
     private final Context mContext;
     LayoutInflater mLayoutInflater;
@@ -30,9 +30,9 @@ public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecy
 //        mLayoutInflater = LayoutInflater.from(mContext);
 //    }
 
-    public TrackFragRecyclerAdapter(Context context, TrackSearchResponse trackSearchResponse) {
+    public TrackFragRecyclerAdapter(Context context, SearchResponse searchResponse) {
         mContext = context;
-        reponseData = trackSearchResponse;
+        reponseData = searchResponse;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -46,10 +46,10 @@ public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TrackDatum track = reponseData.getData().get(position);
+        Datum track = reponseData.getData().get(position);
         holder.mTitle.setText(track.getTitle());
         holder.mArtist.setText(track.getArtist().getName());
-        holder.mDetails.setText(track.getArtist().getDetails());
+        holder.mDetails.setText(track.getAlbum().getTitle());
 
         // Use Glide to load images
         Glide.with(mContext)

@@ -4,14 +4,11 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Tracks {
+public class Genres {
 
     @SerializedName("data")
     @Expose
     private List<Datum> data = null;
-    @SerializedName("checksum")
-    @Expose
-    private String checksum;
 
     public List<Datum> getData() {
         return data;
@@ -19,14 +16,6 @@ public class Tracks {
 
     public void setData(List<Datum> data) {
         this.data = data;
-    }
-
-    public String getChecksum() {
-        return checksum;
-    }
-
-    public void setChecksum(String checksum) {
-        this.checksum = checksum;
     }
 
 }

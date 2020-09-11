@@ -3,6 +3,8 @@ package com.m6code.driza.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Locale;
+
 public class Artist {
 
     @SerializedName("id")
@@ -44,6 +46,10 @@ public class Artist {
     @SerializedName("type")
     @Expose
     private String type;
+
+    @SerializedName("share")
+    @Expose
+    private String share;
 
     public Integer getId() {
         return id;
@@ -149,12 +155,17 @@ public class Artist {
         this.radio = radio;
     }
 
-//    public String getDetails() {
-//        return type + " (" + nb_album + ") Albums";
-//    }
+    public String getShare() {
+        return share;
+    }
+
+    public void setShare(String share) {
+        this.share = share;
+    }
 
     public String getDetails() {
-        return getType() + " " + getName() + " " + getTracklist();
+        //return "Albums(" + getNbAlbum()+") ";
+        return String.format(Locale.ENGLISH,"Albums(%d) Fans(%d)", getNbAlbum(), getNbFan());
     }
 
 }

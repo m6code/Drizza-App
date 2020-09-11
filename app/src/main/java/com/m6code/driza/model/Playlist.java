@@ -3,6 +3,8 @@ package com.m6code.driza.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Locale;
+
 public class Playlist {
 
     @SerializedName("id")
@@ -263,5 +265,9 @@ public class Playlist {
 //        return type + " (" + nb_tracks + ") tracks " + " duration " + duration
 //                + "by " + creator + " created: " + creationDate;
 //    }
+
+    public String getDetails(){
+        return String.format(Locale.ENGLISH, "(%d) tracks created on %s", getNbTracks(), getCreationDate());
+    }
 
 }

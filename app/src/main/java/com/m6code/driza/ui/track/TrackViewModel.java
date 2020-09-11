@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.m6code.driza.model.TrackSearchResponse;
+import com.m6code.driza.model.SearchResponse;
 import com.m6code.driza.services.ApiServiceBuilder;
 import com.m6code.driza.services.DeezerApiQueryService;
 
@@ -16,7 +16,7 @@ import retrofit2.Response;
 
 public class TrackViewModel extends ViewModel {
 
-    private MutableLiveData<TrackSearchResponse> tracksLiveData;
+    private MutableLiveData<SearchResponse> tracksLiveData;
     //ArrayList<Track> mTracksArrayList;
 
     public TrackViewModel() {
@@ -27,24 +27,26 @@ public class TrackViewModel extends ViewModel {
         // TODO: Check for internet connectivity before making network call
         // todo: set fallback UI if no network
         // todo: use ProgressBar in recyclerView to indicate loading if network availability
-        Call<TrackSearchResponse> queryTracks = queryTrackService.getTrackList("https://api.deezer.com/search?q=track:\"power\"");
+        //?index=0&limit=100
+        //Call<SearchResponse> queryTracks = queryTrackService.directApiQuery("https://api.deezer.com/search?limit=1000&q=track:\"superhuman\"");
+        Call<SearchResponse> queryTracks = queryTrackService.searchApi("track", "Superhuman", 1000);
 
-        queryTracks.enqueue(new Callback<TrackSearchResponse>() {
+        queryTracks.enqueue(new Callback<SearchResponse>() {
             @Override
-            public void onResponse(@NonNull Call<TrackSearchResponse> call, @NonNull Response<TrackSearchResponse> response) {
+            public void onResponse(@NonNull Call<SearchResponse> call, @NonNull Response<SearchResponse> response) {
                 if (response.isSuccessful()){
                     tracksLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<TrackSearchResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
                 Log.e("Error", "Request Failed : " + t.getMessage() );
             }
         });
     }
 
-    public MutableLiveData<TrackSearchResponse> getTracksLiveData() {
+    public MutableLiveData<SearchResponse> getTracksLiveData() {
         return tracksLiveData;
     }
 }

@@ -5,43 +5,46 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class TrackSearchResponse {
+public class SearchResponse {
 
         @SerializedName("data")
         @Expose
-        private List<TrackDatum> data = null;
+        private List<Datum> data = null;
         @SerializedName("total")
         @Expose
         private Integer total;
         @SerializedName("next")
         @Expose
         private String next;
+        @SerializedName("prev")
+        @Expose
+        private String prev;
 
         /**
          * No args constructor for use in serialization
          *
          */
-        public TrackSearchResponse() {
+        public SearchResponse() {
         }
 
         /**
          *
-         * @param next contains next 25 tracks
-         * @param total total number of tracks returned from search
-         * @param data track data returned from search
+         * @param next contains next 25 results
+         * @param total total number of results returned from search
+         * @param data  data object returned from search
          */
-        public TrackSearchResponse(List<TrackDatum> data, Integer total, String next) {
+        public SearchResponse(List<Datum> data, Integer total, String next) {
             super();
             this.data = data;
             this.total = total;
             this.next = next;
         }
 
-        public List<TrackDatum> getData() {
+        public List<Datum> getData() {
             return data;
         }
 
-        public void setData(List<TrackDatum> data) {
+        public void setData(List<Datum> data) {
             this.data = data;
         }
 
@@ -61,4 +64,11 @@ public class TrackSearchResponse {
             this.next = next;
         }
 
+    public String getPrev() {
+        return prev;
     }
+
+    public void setPrev(String prev) {
+        this.prev = prev;
+    }
+}
