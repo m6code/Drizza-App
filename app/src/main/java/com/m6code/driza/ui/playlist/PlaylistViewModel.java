@@ -26,6 +26,7 @@ public class PlaylistViewModel extends ViewModel {
         DeezerApiQueryService playlistQueryService = ApiServiceBuilder.buildApiService(DeezerApiQueryService.class);
         // Do not make Api call if string is empty
         if (!UserSearch.getSearchText().trim().isEmpty()) {
+            //Call<SearchResponse> playlistQuery = playlistQueryService.directApiQuery("https://api.deezer.com/search?limit=500&q=playlist:"+UserSearch.getSearchText());
             Call<SearchResponse> playlistQuery = playlistQueryService.searchApi("playlist", UserSearch.getSearchText(), 500);
             playlistQuery.enqueue(new Callback<SearchResponse>() {
                 @Override

@@ -32,6 +32,7 @@ public class AlbumViewModel extends ViewModel {
         DeezerApiQueryService queryAlbumService = ApiServiceBuilder.buildApiService(DeezerApiQueryService.class);
         // Do not make Api call if string is empty
         if (!UserSearch.getSearchText().trim().isEmpty()) {
+            //Call<SearchResponse> queryAlbum = queryAlbumService.directApiQuery("https://api.deezer.com/search?limit=500&q=album:"+UserSearch.getSearchText());
             Call<SearchResponse> queryAlbum = queryAlbumService.searchApi("album", UserSearch.getSearchText(), 500);
             queryAlbum.enqueue(new Callback<SearchResponse>() {
                 @Override

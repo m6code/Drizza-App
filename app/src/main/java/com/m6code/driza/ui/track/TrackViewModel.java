@@ -31,6 +31,7 @@ public class TrackViewModel extends ViewModel {
         //Call<SearchResponse> queryTracks = queryTrackService.directApiQuery("https://api.deezer.com/search?limit=1000&q=track:\"superhuman\"");
         // Do not make Api call if string is empty
         if (!UserSearch.getSearchText().trim().isEmpty()) {
+            //Call<SearchResponse> queryTracks = queryTrackService.directApiQuery("https://api.deezer.com/search?limit=500&q=track:"+UserSearch.getSearchText());
             Call<SearchResponse> queryTracks = queryTrackService.searchApi("track", UserSearch.getSearchText(), 500);
             queryTracks.enqueue(new Callback<SearchResponse>() {
                 @Override

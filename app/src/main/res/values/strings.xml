@@ -9,5 +9,5 @@
     <string name="title_explore">Explore</string>
     <string name="cover">Cover</string>
     <string name="search_title">Search</string>
-    <string name="search_hint">Enter keywords</string>
+    <string name="search_hint">Enter search text</string>
 </resources>
