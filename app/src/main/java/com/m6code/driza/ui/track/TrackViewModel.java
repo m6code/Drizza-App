@@ -16,6 +16,7 @@ import retrofit2.Response;
 
 public class TrackViewModel extends ViewModel {
 
+    private static final String LOG_TAG = "TrackViewModel";
     private MutableLiveData<SearchResponse> tracksLiveData;
     //ArrayList<Track> mTracksArrayList;
 
@@ -24,12 +25,10 @@ public class TrackViewModel extends ViewModel {
         // make Api call
         DeezerApiQueryService queryTrackService = ApiServiceBuilder.buildApiService(DeezerApiQueryService.class);
 
-        // TODO: Check for internet connectivity before making network call
-        // todo: set fallback UI if no network
         // todo: use ProgressBar in recyclerView to indicate loading if network availability
         //?index=0&limit=100
         //Call<SearchResponse> queryTracks = queryTrackService.directApiQuery("https://api.deezer.com/search?limit=1000&q=track:\"superhuman\"");
-        Call<SearchResponse> queryTracks = queryTrackService.searchApi("track", "Superhuman", 1000);
+        Call<SearchResponse> queryTracks = queryTrackService.searchApi("track", "Superhuman", 500);
 
         queryTracks.enqueue(new Callback<SearchResponse>() {
             @Override
@@ -41,7 +40,7 @@ public class TrackViewModel extends ViewModel {
 
             @Override
             public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
-                Log.e("Error", "Request Failed : " + t.getMessage() );
+                Log.e(LOG_TAG, "Request Failed : " + t.getMessage() );
             }
         });
     }
