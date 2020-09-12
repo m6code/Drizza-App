@@ -1,13 +1,16 @@
 package com.m6code.driza.ui.album;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -53,6 +56,34 @@ public class AlbumFragRecyclerAdapter extends RecyclerView.Adapter<AlbumFragRecy
                 .placeholder(R.drawable.ic_album_24)
                 .into(holder.mCover);
         holder.mCurrentPos = position;
+
+        holder.mCard.setOnClickListener(view -> {
+            // Show Dialog
+            Dialog dialog = new Dialog(mContext);
+            dialog.setContentView(R.layout.track_detail_dailog);
+
+            // find views
+            TextView title = dialog.findViewById(R.id.textView_title);
+            TextView details = dialog.findViewById(R.id.textView_album);
+            TextView artist = dialog.findViewById(R.id.textView_artist_name);
+            ImageView cover = dialog.findViewById(R.id.imageView);
+            Button albumBt = dialog.findViewById(R.id.button_view_album);
+            Button button2 = dialog.findViewById(R.id.button_preview_track);
+
+            button2.setText("Artist Page");
+
+            title.setText(album.getTitle());
+            artist.setText(album.getArtist().getName());
+            details.setText(String.format(Locale.ENGLISH, "%d Track(s)", album.getNbTracks()));
+
+            Glide.with(dialog.getContext())
+                    .load(album.getCoverMedium())
+                    .placeholder(R.drawable.ic_album_24)
+                    .into(cover);
+            // Query Api and set dat on Dialog box
+
+            dialog.show();
+        });
     }
 
     @Override
@@ -60,11 +91,12 @@ public class AlbumFragRecyclerAdapter extends RecyclerView.Adapter<AlbumFragRecy
         return repsonseData.getData().size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mTitle;
         public final TextView mArtist;
         public final TextView mDetails;
         public final ImageView mCover;
+        public final CardView mCard;
         public int mCurrentPos;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,6 +105,7 @@ public class AlbumFragRecyclerAdapter extends RecyclerView.Adapter<AlbumFragRecy
             mArtist = itemView.findViewById(R.id.tv_artist);
             mDetails = itemView.findViewById(R.id.tv_details);
             mCover = itemView.findViewById(R.id.imageView);
+            mCard = (CardView) itemView.findViewById(R.id.cardView);
         }
     }
 }

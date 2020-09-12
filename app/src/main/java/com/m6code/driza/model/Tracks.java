@@ -12,6 +12,17 @@ public class Tracks {
     @SerializedName("checksum")
     @Expose
     private String checksum;
+    @SerializedName("total")
+    @Expose
+    private Integer total;
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
 
     public List<Datum> getData() {
         return data;

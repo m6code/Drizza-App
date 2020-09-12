@@ -10,4 +10,9 @@
     <string name="cover">Cover</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Enter search text</string>
+    <string name="album">Album</string>
+    <string name="preview">Preview</string>
+    <string name="textview_album">Album Title</string>
+    <string name="textview_title">Track Title</string>
+    <string name="textview_artist">Artist Name</string>
 </resources>

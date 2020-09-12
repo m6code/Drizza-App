@@ -1,13 +1,16 @@
 package com.m6code.driza.ui.track;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,9 +21,9 @@ import com.m6code.driza.model.SearchResponse;
 
 public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecyclerAdapter.ViewHolder> {
 
-    private SearchResponse reponseData;
     private final Context mContext;
-    LayoutInflater mLayoutInflater;
+    private final LayoutInflater mLayoutInflater;
+    private final SearchResponse reponseData;
 
     public TrackFragRecyclerAdapter(Context context, SearchResponse searchResponse) {
         mContext = context;
@@ -53,6 +56,45 @@ public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecy
 
         holder.mCurrentPos = position;
 
+//        holder.mCover.setOnClickListener(view ->
+//                Toast.makeText(mContext, "Clicked Cover of track: " + track.getId(), Toast.LENGTH_LONG).show());
+//        holder.mTitle.setOnClickListener(view ->
+//                Toast.makeText(mContext, "Clicked Title: " + track.getTitle(), Toast.LENGTH_LONG).show());
+//        holder.mArtist.setOnClickListener(view ->
+//                Toast.makeText(mContext, "Clicked Artist: " + track.getArtist().getName(), Toast.LENGTH_LONG).show());
+//        holder.mDetails.setOnClickListener(view ->
+//                Toast.makeText(mContext, "Clicked on Details: " + track.getAlbum().getTitle(), Toast.LENGTH_LONG).show());
+
+
+        // TODO: Use ID to query api for tracks & Launch Dialog
+        holder.mCard.setOnClickListener(view -> {
+            //Toast.makeText(mContext, "Clicked card id: " + track.getId(), Toast.LENGTH_LONG).show();
+
+            // Show Dialog
+            Dialog dialog = new Dialog(mContext);
+            dialog.setContentView(R.layout.track_detail_dailog);
+
+            // find views
+            TextView title = dialog.findViewById(R.id.textView_title);
+            TextView album = dialog.findViewById(R.id.textView_album);
+            TextView artist = dialog.findViewById(R.id.textView_artist_name);
+            ImageView cover = dialog.findViewById(R.id.imageView);
+
+            title.setText(track.getTitle());
+            artist.setText(track.getArtist().getName());
+            album.setText(track.getAlbum().getTitle());
+
+            Glide.with(dialog.getContext())
+                    .load(track.getAlbum().getCoverMedium())
+                    .placeholder(R.drawable.ic_track_24)
+                    .into(cover);
+            // Query Api and set dat on Dialog box
+
+            dialog.show();
+
+        });
+
+
 //        if (isImagePosition(position)) {
 //            Glide.with(mContext)
 //                    .load(track.getAlbum().getCover())
@@ -77,19 +119,25 @@ public class TrackFragRecyclerAdapter extends RecyclerView.Adapter<TrackFragRecy
         return reponseData.getData().size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mTitle;
         public final TextView mArtist;
         public final TextView mDetails;
         public final ImageView mCover;
+        public final CardView mCard;
         public int mCurrentPos;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTitle = itemView.findViewById(R.id.tv_title);
-            mArtist = itemView.findViewById(R.id.tv_artist);
-            mDetails = itemView.findViewById(R.id.tv_details);
-            mCover = itemView.findViewById(R.id.imageView);
+            mTitle = (TextView) itemView.findViewById(R.id.tv_title);
+            mArtist = (TextView) itemView.findViewById(R.id.tv_artist);
+            mDetails = (TextView) itemView.findViewById(R.id.tv_details);
+            mCover = (ImageView) itemView.findViewById(R.id.imageView);
+            mCard = (CardView) itemView.findViewById(R.id.cardView);
+
+            //itemView.setOnClickListener(view -> Toast.makeText(itemView.getContext(), "Clicked ItemView", Toast.LENGTH_LONG).show());
         }
     }
+
+
 }
