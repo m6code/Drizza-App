@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +25,9 @@ public class TrackFragment extends Fragment {
     RecyclerView mRecyclerView;
     TrackFragRecyclerAdapter mFragRecyclerAdapter;
     private ProgressBar mProgressBar;
+    private LinearLayout mErrorLayout;
+    private ImageView mErrorImage;
+    private TextView mErrorText;
 
     public View onCreateView(@NonNull LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceState) {
 
@@ -31,6 +37,9 @@ public class TrackFragment extends Fragment {
         View rootView = layoutInflater.inflate(R.layout.fragment_main, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mProgressBar = rootView.findViewById(R.id.progressBar);
+        mErrorLayout = rootView.findViewById(R.id.errorLayout);
+        mErrorImage = rootView.findViewById(R.id.imageView_error);
+        mErrorText = rootView.findViewById(R.id.textView_error);
 
         if (NetworkUtil.getConnectionStatus(getActivity())) {
             if (!UserSearch.getSearchText().trim().isEmpty()) {
@@ -39,6 +48,7 @@ public class TrackFragment extends Fragment {
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     mRecyclerView.setAdapter(mFragRecyclerAdapter);
                     mProgressBar.setVisibility(View.GONE); // Find and set visibility of progressBar
+                    mErrorLayout.setVisibility(View.GONE);
                 });
                 // SAME AS ABOVE CODE
 //                trackViewModel.getTracksLiveData().observe(getViewLifecycleOwner(), new Observer<SearchResponse>() {
@@ -52,17 +62,23 @@ public class TrackFragment extends Fragment {
 //                });
 
             } else {
-                mProgressBar.setVisibility(View.GONE);
-                Toast.makeText(getContext(), "Provide search text", Toast.LENGTH_LONG).show();
+                setErrorMessage(R.drawable.ic_search,R.string.provide_search_text);
             }
 
         } else {
             // Show No Internet Image and textView
-            mProgressBar.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "No Internet, check your connection!", Toast.LENGTH_LONG).show();
+            setErrorMessage(R.drawable.ic_network_off, R.string.no_internet);
         }
 
         return rootView;
 
+    }
+
+    public void setErrorMessage(int drawable, int text){
+        mProgressBar.setVisibility(View.GONE);
+        mErrorImage.setImageResource(drawable);
+        mErrorText.setText(text);
+        mErrorLayout.setVisibility(View.VISIBLE);
+//        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
     }
 }

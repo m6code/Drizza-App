@@ -15,4 +15,6 @@
     <string name="textview_album">Album Title</string>
     <string name="textview_title">Track Title</string>
     <string name="textview_artist">Artist Name</string>
+    <string name="provide_search_text">Provide Search Text</string>
+    <string name="no_internet">No Internet Connection!</string>
 </resources>
