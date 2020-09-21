@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,15 +32,21 @@ public class ArtistFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ArtistViewModel artistViewModel = new ViewModelProvider.AndroidViewModelFactory(
-                getActivity().getApplication()).create(ArtistViewModel.class);
-
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mProgressBar = rootView.findViewById(R.id.progressBar);
         mErrorLayout = rootView.findViewById(R.id.errorLayout);
         mErrorImage = rootView.findViewById(R.id.imageView_error);
         mErrorText = rootView.findViewById(R.id.textView_error);
+
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ArtistViewModel artistViewModel = new ViewModelProvider(requireActivity()).get(ArtistViewModel.class);
 
         if (NetworkUtil.getConnectionStatus(getActivity())) {
             if (!UserSearch.getSearchText().trim().isEmpty()) {
@@ -56,8 +63,6 @@ public class ArtistFragment extends Fragment {
         } else {
             setErrorMessage(R.drawable.ic_network_off, R.string.no_internet);
         }
-
-        return rootView;
     }
 
     public void setErrorMessage(int drawable, int text){

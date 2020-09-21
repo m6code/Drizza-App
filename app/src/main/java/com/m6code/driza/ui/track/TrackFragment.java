@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,15 +32,22 @@ public class TrackFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceState) {
 
-        TrackViewModel trackViewModel = new ViewModelProvider.AndroidViewModelFactory(
-                getActivity().getApplication()).create(TrackViewModel.class);
-
         View rootView = layoutInflater.inflate(R.layout.fragment_main, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mProgressBar = rootView.findViewById(R.id.progressBar);
         mErrorLayout = rootView.findViewById(R.id.errorLayout);
         mErrorImage = rootView.findViewById(R.id.imageView_error);
         mErrorText = rootView.findViewById(R.id.textView_error);
+
+        return rootView;
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        TrackViewModel trackViewModel = new ViewModelProvider(requireActivity()).get(TrackViewModel.class);
 
         if (NetworkUtil.getConnectionStatus(getActivity())) {
             if (!UserSearch.getSearchText().trim().isEmpty()) {
@@ -69,9 +77,6 @@ public class TrackFragment extends Fragment {
             // Show No Internet Image and textView
             setErrorMessage(R.drawable.ic_network_off, R.string.no_internet);
         }
-
-        return rootView;
-
     }
 
     public void setErrorMessage(int drawable, int text){

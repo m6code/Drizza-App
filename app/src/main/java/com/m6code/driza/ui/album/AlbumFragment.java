@@ -8,8 +8,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,15 +31,30 @@ public class AlbumFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
-        AlbumViewModel albumViewModel = new ViewModelProvider.AndroidViewModelFactory(
-                getActivity().getApplication()).create(AlbumViewModel.class);
-
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mProgressBar = rootView.findViewById(R.id.progressBar);
         mErrorLayout = rootView.findViewById(R.id.errorLayout);
         mErrorImage = rootView.findViewById(R.id.imageView_error);
         mErrorText = rootView.findViewById(R.id.textView_error);
+
+
+        return rootView;
+    }
+
+    public void setErrorMessage(int drawable, int text) {
+        mProgressBar.setVisibility(View.GONE);
+        mErrorImage.setImageResource(drawable);
+        mErrorText.setText(text);
+        mErrorLayout.setVisibility(View.VISIBLE);
+//        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        AlbumViewModel albumViewModel = new ViewModelProvider(requireActivity()).get(AlbumViewModel.class);
 
         // Check for internet first
         if (NetworkUtil.getConnectionStatus(getContext())) {
@@ -51,22 +67,11 @@ public class AlbumFragment extends Fragment {
                     mErrorLayout.setVisibility(View.GONE);
                 });
             } else {
-                setErrorMessage(R.drawable.ic_search,R.string.provide_search_text);
+                setErrorMessage(R.drawable.ic_search, R.string.provide_search_text);
             }
 
         } else {
             setErrorMessage(R.drawable.ic_network_off, R.string.no_internet);
         }
-
-        return rootView;
     }
-
-    public void setErrorMessage(int drawable, int text){
-        mProgressBar.setVisibility(View.GONE);
-        mErrorImage.setImageResource(drawable);
-        mErrorText.setText(text);
-        mErrorLayout.setVisibility(View.VISIBLE);
-//        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
-    }
-
 }

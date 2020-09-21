@@ -3,6 +3,7 @@ package com.m6code.driza.services;
 import com.m6code.driza.model.Album;
 import com.m6code.driza.model.SearchResponse;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -19,4 +20,7 @@ public interface DeezerApiQueryService {
 
     @GET("search/{type}")
     Call<SearchResponse> searchApi(@Path("type") String searchType, @Query("q") String searchText, @Query("limit") int limitResultTo );
+
+    @GET("{type}/{id}")
+    Call<SearchResponse> getDiaFromApi(@Path("type") String type, @Path("id") BigInteger id);
 }
